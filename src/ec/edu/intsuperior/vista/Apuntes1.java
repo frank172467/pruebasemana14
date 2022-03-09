@@ -5,6 +5,8 @@
  */
 package ec.edu.intsuperior.vista;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,6 +18,21 @@ public class Apuntes1 extends javax.swing.JFrame {
     /**
      * Creates new form Apuntes1
      */
+    private int Verificar;
+    private String Nombre;
+    private String Apellidos;
+    private String Mes;
+    private String Dia;
+    private String Email;
+    private String Contraseña;
+    private String Año;
+    private String p1;
+    private String p2;
+    private String p3;
+    private String p4;
+    private String p5;
+    private String p6;
+    
     public Apuntes1() {
         initComponents();
     }
@@ -65,6 +82,7 @@ public class Apuntes1 extends javax.swing.JFrame {
         traspasar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        save = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,7 +106,7 @@ public class Apuntes1 extends javax.swing.JFrame {
 
         mujer.setText("Femenino");
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setText("mes");
 
         jLabel7.setText("Año");
 
@@ -121,6 +139,11 @@ public class Apuntes1 extends javax.swing.JFrame {
         jLabel13.setText("Interes");
 
         economia.setText("Economia");
+        economia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                economiaActionPerformed(evt);
+            }
+        });
 
         tecnologia.setText("Tecnologia");
 
@@ -163,6 +186,13 @@ public class Apuntes1 extends javax.swing.JFrame {
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
+
+        save.setText("Guardar");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -255,7 +285,10 @@ public class Apuntes1 extends javax.swing.JFrame {
                                 .addGap(93, 93, 93))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38))))))
+                                .addGap(38, 38, 38))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(save)
+                                .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,11 +340,16 @@ public class Apuntes1 extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(economia)
-                    .addComponent(tecnologia)
-                    .addComponent(juegos))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(economia)
+                            .addComponent(tecnologia)
+                            .addComponent(juegos)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(save)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deportes)
@@ -409,7 +447,7 @@ public class Apuntes1 extends javax.swing.JFrame {
                 }
                 default:{
                     JOptionPane.showMessageDialog(null, "Datos verificados corretamente");
-                Verificar=1;    
+                //*Verificar=1;    
                 break;
                 }
             }    
@@ -460,6 +498,63 @@ public class Apuntes1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void economiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_economiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_economiaActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        // Aqui va todas las acciones del boton guardar:
+        if(evt.getSource()==save){
+        
+            if(save.getText().length()==0 || apellido.getText().length()==0 || anio.getText().length()==0 
+            || mail.getText().length()==0 || pass.getText().length()==0 || rpass.getText().length()==0
+            ||(hombre.isSelected()==false && mujer.isSelected()==false)){
+            JOptionPane.showMessageDialog(null, "Debe ingresar sus datos");
+         }else{ 
+                try{
+                    BufferedWriter bw = new BufferedWriter(new FileWriter("c:/Archivo/prueba.txt",true));
+
+                   Nombre = nombre.getText();
+                   Apellidos = apellido.getText();
+                   Mes=(String)jComboBox2.getSelectedItem();
+                   Dia=(String)jComboBox1.getSelectedItem();
+                   Email = mail.getText();
+                   Contraseña = pass.getText();
+                   Año = anio.getText();
+                   
+                   p1 =(String)economia.getText();
+                   p2 =(String)tecnologia.getText();
+                   p3 =(String)juegos.getText();
+                   p4 =(String)deportes.getText();
+                   p5 =(String)musica.getText();
+                   p6 =(String)fotografia.getText();
+
+                   bw.write("Nombre: " +nombre+ "Apellidos:" +apellido+ "Fecha de nacimiento:" +jComboBox1+ "/" +jComboBox2+ "/" +anio+ "Email: " +mail+ "Contraseña: "
+                   +pass+ "Sexo: " +hombre+  "Preferencias: " +economia+ "," +tecnologia+ "," +juegos+ "," +deportes+ "," +musica+ "," +fotografia);
+                   bw.newLine();
+
+                   nombre.setText("");
+                   apellido.setText("");
+                   anio.setText("");
+                   mail.setText("");
+                   pass.setText("");
+                   rpass.setText("");
+                  hombre.setSelected(false);
+                  mujer.setSelected(false);
+
+                  economia.setSelected(false);
+                  tecnologia.setSelected(false);
+                  juegos.setSelected(false);
+                  deportes.setSelected(false);
+                  musica.setSelected(false);
+                  fotografia.setSelected(false);
+               }catch(Exception e){
+                   e.printStackTrace();
+               }
+            }
+        }
+    }//GEN-LAST:event_saveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -530,6 +625,7 @@ public class Apuntes1 extends javax.swing.JFrame {
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField pass;
     private javax.swing.JTextField rpass;
+    private javax.swing.JButton save;
     private javax.swing.JRadioButton tecnologia;
     private javax.swing.JButton traspasar;
     private javax.swing.JButton verificar;
